@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MIT WPU Pune, Maharashtra - Student Verification Portal</title>
+  <style>
+    :root {
+      --primary-color: #a6192e; /* MIT WPU Crimson */
+      --primary-dark: #801020;
+      --secondary-color: #112240;
+      --accent-color: #d4af37;
+      --bg-color: #f4f6f9;
+      --card-bg: #ffffff;
+      --text-dark: #222222;
+      --text-muted: #666666;
+      --border-color: #cccccc;
+      --success-bg: #e8f8f5;
+      --success-border: #2ecc71;
+      --success-text: #1b7a43;
+      --error-bg: #fde8e8;
+      --error-border: #e74c3c;
+      --error-text: #c0392b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* Header Styling */
+    header {
+      width: 100%;
+      background-color: var(--primary-color);
+      border-bottom: 4px solid var(--accent-color);
+      color: #ffffff;
+      text-align: center;
+      padding: 24px 0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .portal-subtitle {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Container Styling */
+    .container {
+      background-color: var(--card-bg);
+      padding: 35px 40px;
+      margin-top: 20px;
+      margin-bottom: 40px;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+      width: 100%;
+      max-width: 520px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--primary-color);
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-size: 1rem;
+      background-color: #fafafa;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      background-color: #ffffff;
+      box-shadow: 0 0 0 3px rgba(166, 25, 46, 0.15);
+    }
+
+    /* Buttons */
+    .button-group {
+      display: flex;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 13px;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      font-weight: bold;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-verify {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .btn-verify:hover {
+      background-color: var(--primary-dark);
+    }
+
+    .btn-refresh {
+      background-color: #6c757d;
+      color: white;
+    }
+
+    .btn-refresh:hover {
+      background-color: #5a6268;
+    }
+
+    /* Result Box Styling */
+    .result-group {
+      margin-top: 25px;
+    }
+
+    .result-box {
+      min-height: 60px;
+      padding: 16px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background-color: #fafafa;
+      font-size: 1rem;
+      line-height: 1.6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    /* Status Styles */
+    .success {
+      background-color: var(--success-bg);
+      border-color: var(--success-border);
+      color: var(--success-text);
+      font-weight: 600;
+    }
+
+    .error {
+      background-color: var(--error-bg);
+      border-color: var(--error-border);
+      color: var(--error-text);
+      font-weight: 500;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 20px 0;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>MIT WPU Pune, Maharashtra</h1>
+  </header>
+
+  <p class="portal-subtitle">Official Degree Verification Portal</p>
+
+  <!-- Main Input Form -->
+  <div class="container">
+    <div class="form-group">
+      <label for="enrollInput">Enrollment No (Enroll)</label>
+      <input type="text" id="enrollInput" autocomplete="off" />
+    </div>
+
+    <div class="form-group">
+      <label for="nameInput">Candidate Name</label>
+      <input type="text" id="nameInput" autocomplete="off" />
+    </div>
+
+    <div class="button-group">
+      <button class="btn btn-verify" onclick="verifyRecord()">Verify</button>
+      <button class="btn btn-refresh" onclick="refreshForm()">Refresh</button>
+    </div>
+
+    <!-- Result Box -->
+    <div class="result-group">
+      <label>Result</label>
+      <div id="resultBox" class="result-box">
+        Enter details above and click Verify.
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; MIT World Peace University, Pune &bull; Examination & Academic Cell &bull; All Rights Reserved
+  </footer>
+
+  <script>
+    function verifyRecord() {
+      // Get values from input boxes
+      const rawEnroll = document.getElementById('enrollInput').value;
+      const rawName = document.getElementById('nameInput').value;
+      const resultBox = document.getElementById('resultBox');
+
+      // Normalize inputs (strip spaces and ignore casing)
+      const cleanEnroll = rawEnroll.replace(/\s+/g, '').toUpperCase();
+      const cleanName = rawName.trim().toLowerCase();
+
+      // Target criteria
+      const targetEnroll = "MITWPU/PhD/2021/AUT/042".replace(/\s+/g, '').toUpperCase();
+      const targetName = "prem kumar";
+
+      // Reset CSS classes
+      resultBox.className = 'result-box';
+
+      // Validation check
+      if (cleanEnroll === targetEnroll && cleanName === targetName) {
+        resultBox.classList.add('success');
+        resultBox.innerHTML = "Candidates's Name-Prem Kumar,Father's Name-Ram Sagar Prasad, Mother's Name- Asha Prasad, DOB-20.01.1987, STATUS- PhD Awarded, Thesis - Car ECU neural Scheme.";
+      } else if (rawEnroll.trim() === "" || rawName.trim() === "") {
+        resultBox.classList.add('error');
+        resultBox.innerHTML = "Please enter both Enrollment No and Candidate Name.";
+      } else {
+        resultBox.classList.add('error');
+        resultBox.innerHTML = "No record found matching the provided Enrollment No and Name.";
+      }
+    }
+
+    function refreshForm() {
+      // Clear input fields
+      document.getElementById('enrollInput').value = '';
+      document.getElementById('nameInput').value = '';
+
+      // Reset result box
+      const resultBox = document.getElementById('resultBox');
+      resultBox.className = 'result-box';
+      resultBox.innerHTML = 'Enter details above and click Verify.';
+
+      // Focus back to first input box
+      document.getElementById('enrollInput').focus();
+    }
+  </script>
+
+</body>
+</html>
